@@ -2,40 +2,52 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shared - Temporary Text Sharing</title>
+    <title>Shared - Secure Messages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div class="min-h-screen flex flex-col bg-gradient-to-br from-[#1a0f0f] via-[#1a1a2e] to-[#0f1a2e]">
-      <!-- Stars background -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="stars"></div>
-        <div class="stars2"></div>
-        <div class="stars3"></div>
-      </div>
-      
-      <!-- Main content -->
-      <div class="flex-grow relative z-10">
-        <div id="root"></div>
-        <script type="module" src="/src/main.tsx"></script>
-      </div>
+  <body class="bg-gradient-to-br from-[#1a0f0f] via-[#1a1a2e] to-[#0f1a2e] min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-2xl flex flex-col items-center text-center">
+      <!-- Logo/Header -->
+      <h1 class="text-6xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+        Shared
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-gray-400 mt-2">
+        Short-Lived Encrypted Messages
+      </p>
+
+      <!-- Main heading -->
+      <h2 class="text-4xl font-bold mt-12 text-white">
+        Share Secrets Securely
+      </h2>
+
+      <!-- Description -->
+      <p class="text-gray-300 mt-4">
+        Share a secret with someone knowing it will expire and be wiped in 1 hour
+      </p>
+
+      <!-- Message input -->
+      <textarea 
+        class="w-full mt-8 h-32 bg-slate-800/50 rounded-lg border border-slate-700 p-4 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none"
+        placeholder="Type your secret message here..."
+      ></textarea>
+
+      <!-- Button -->
+      <button class="mt-4 px-8 py-3 bg-purple-600 hover:bg-purple-700 rounded-full transition-colors text-white font-medium">
+        Generate Secure Link
+      </button>
 
       <!-- Footer -->
-      <footer class="relative z-10 p-5 text-center">
+      <footer class="mt-auto pt-8 text-gray-400">
         <a 
           href="https://dailyai.studio" 
           target="_blank" 
-          class="inline-flex items-center gap-1 text-[#FF3399] hover:text-[#ff66b3] transition-colors"
+          class="inline-flex items-center gap-1 hover:text-white transition-colors"
         >
-          Shared by DailyAi.Studio
-          <svg 
-            class="w-4 h-4" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            stroke-width="2"
-          >
+          Powered by DailyAi.Studio
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
