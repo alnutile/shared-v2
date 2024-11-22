@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Share2, Sparkles } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { createShare } from '../lib/api';
@@ -35,12 +35,12 @@ export function CreatePage() {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
       <div className="max-w-4xl mx-auto p-6">
-        <div className="flex items-center justify-center gap-3 mb-8">
+        <Link to="/" className="flex items-center justify-center gap-3 mb-8 hover:opacity-80 transition-opacity">
           <Share2 className="w-8 h-8 text-pink-500" />
           <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
             ShareText
           </h1>
-        </div>
+        </Link>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
