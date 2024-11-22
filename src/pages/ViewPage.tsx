@@ -75,7 +75,7 @@ export function ViewPage() {
           <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <Share2 className="w-8 h-8 text-pink-500" />
             <h1 className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-              ShareText
+              Shared
             </h1>
           </Link>
 

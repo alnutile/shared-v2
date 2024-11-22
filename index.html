@@ -4,30 +4,44 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ShareText - Temporary Text Sharing</title>
+    <title>Shared - Temporary Text Sharing</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <footer class="bg-[#1a1a1a] p-5 text-center">
-      <a 
-        href="https://dailyai.studio" 
-        target="_blank" 
-        class="inline-flex items-center gap-1 text-gray-400 hover:text-white transition-colors"
-      >
-        Powered by DailyAi.Studio
-        <svg 
-          class="w-4 h-4" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          stroke-width="2"
+    <div class="min-h-screen flex flex-col bg-gradient-to-br from-[#1a0f0f] via-[#1a1a2e] to-[#0f1a2e]">
+      <!-- Stars background -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+      </div>
+      
+      <!-- Main content -->
+      <div class="flex-grow relative z-10">
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
+      </div>
+
+      <!-- Footer -->
+      <footer class="relative z-10 p-5 text-center">
+        <a 
+          href="https://dailyai.studio" 
+          target="_blank" 
+          class="inline-flex items-center gap-1 text-[#FF3399] hover:text-[#ff66b3] transition-colors"
         >
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-          <polyline points="15 3 21 3 21 9"></polyline>
-          <line x1="10" y1="14" x2="21" y2="3"></line>
-        </svg>
-      </a>
-    </footer>
+          Shared by DailyAi.Studio
+          <svg 
+            class="w-4 h-4" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </footer>
+    </div>
   </body>
 </html>

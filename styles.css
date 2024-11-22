@@ -22,4 +22,60 @@
   width: 16px;
   height: 16px;
   stroke-width: 2;
+}
+
+/* Stars animation */
+.stars, .stars2, .stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent;
+}
+
+.stars {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAAG1BMVEUAAAD///8fHx8/Pz9fX1+fn5+/v7/f39////9TQgqaAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAR0lEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeBrp9AABMHYEJgAAAABJRU5ErkJggg==) repeat top center;
+  animation: move-twinkle 200s linear infinite;
+}
+
+.stars2 {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAAG1BMVEUAAAD///8fHx8/Pz9fX1+fn5+/v7/f39////9TQgqaAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAR0lEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeBrp9AABMHYEJgAAAABJRU5ErkJggg==) repeat top center;
+  animation: move-twinkle 150s linear infinite;
+}
+
+.stars3 {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQBAMAAABykSv/AAAAG1BMVEUAAAD///8fHx8/Pz9fX1+fn5+/v7/f39////9TQgqaAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAR0lEQVR4nO3BMQEAAADCoPVP7WsIoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeBrp9AABMHYEJgAAAABJRU5ErkJggg==) repeat top center;
+  animation: move-twinkle 100s linear infinite;
+}
+
+@keyframes move-twinkle {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+/* Add this to your existing Tailwind config if needed */
+@layer utilities {
+  .bg-gradient-to-br {
+    background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+  }
+}
+
+.logo {
+  text-shadow: 
+    0 0 10px rgba(255, 51, 153, 0.5),
+    0 0 20px rgba(255, 51, 153, 0.3),
+    0 0 30px rgba(255, 51, 153, 0.2);
+  color: #FF3399;
+}
+
+.logo svg {
+  filter: drop-shadow(0 0 10px rgba(255, 51, 153, 0.5));
 } 
