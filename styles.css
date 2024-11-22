@@ -1,0 +1,25 @@
+.footer {
+  padding: 20px;
+  text-align: center;
+  background-color: #1a1a1a;
+  color: #808080;
+}
+
+.footer-link {
+  color: #808080;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+}
+
+.external-link {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+} 
