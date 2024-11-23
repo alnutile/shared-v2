@@ -105,12 +105,11 @@
 
       async function getSecretMessage(uuid) {
         try {
-          const response = await fetch(WEBHOOK_GET_URL, {
-            method: 'POST',
+          const response = await fetch(`${WEBHOOK_GET_URL}?uuid=${uuid}`, {
+            method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ uuid })
+            }
           });
           
           if (!response.ok) {
