@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shared - Secure Messages</title>
-    <meta property="og:site_name" content="Shared">
-    <meta name="keywords" content="secure messaging, encrypted messages, short-lived secrets, privacy, security">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="canonical" href="https://shared.dailyai.studio">
-    <meta name="description" content="Share short-lived encrypted messages securely with Shared. Your secrets expire and are wiped after 1 hour for maximum privacy and security.">
   </head>
   <body class="bg-gradient-to-br from-[#1a0f0f] via-[#1a1a2e] to-[#0f1a2e] min-h-screen">
     <div class="container mx-auto px-4 py-8 max-w-2xl flex flex-col items-center text-center">
@@ -17,31 +13,43 @@
         Shared
       </h1>
 
-      <!-- Subtitle -->
-      <p class="text-gray-400 mt-2">
-        Short-Lived Encrypted Messages
-      </p>
+      <!-- Create Message UI -->
+      <div id="createMessage">
+        <p class="text-gray-400 mt-2">
+          Short-Lived Encrypted Messages
+        </p>
 
-      <!-- Main heading -->
-      <h2 class="text-4xl font-bold mt-12 text-white">
-        Share Secrets Securely
-      </h2>
+        <h2 class="text-4xl font-bold mt-12 text-white">
+          Share Secrets Securely
+        </h2>
 
-      <!-- Description -->
-      <p class="text-gray-300 mt-4">
-        Share a secret with someone knowing it will expire and be wiped in 1 hour
-      </p>
+        <p class="text-gray-300 mt-4">
+          Share a secret with someone knowing it will expire and be wiped in 1 hour
+        </p>
 
-      <!-- Message input -->
-      <textarea 
-        class="w-full mt-8 h-32 bg-slate-800/50 rounded-lg border border-slate-700 p-4 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none"
-        placeholder="Type your secret message here..."
-      ></textarea>
+        <textarea 
+          class="w-full mt-8 h-32 bg-slate-800/50 rounded-lg border border-slate-700 p-4 focus:border-purple-500 focus:ring-1 focus:ring-purple-500 outline-none text-white placeholder-gray-500"
+          placeholder="Type your secret message here..."
+        ></textarea>
 
-      <!-- Button -->
-      <button class="mt-4 px-8 py-3 bg-purple-600 hover:bg-purple-700 rounded-full transition-colors text-white font-medium">
-        Generate Secure Link
-      </button>
+        <button 
+          id="generateButton"
+          class="mt-4 px-8 py-3 bg-purple-600 hover:bg-purple-700 rounded-full transition-colors text-white font-medium"
+        >
+          Generate Secure Link
+        </button>
+      </div>
+
+      <!-- View Message UI -->
+      <div id="viewMessage" class="hidden w-full">
+        <div class="bg-slate-800/50 rounded-lg border border-slate-700 p-4 mt-8">
+          <h3 class="text-xl text-white mb-2">Secret Message:</h3>
+          <p id="secretMessage" class="text-white"></p>
+        </div>
+        <div id="expiredMessage" class="hidden mt-4 text-red-400">
+          This message has expired or doesn't exist.
+        </div>
+      </div>
 
       <!-- Footer -->
       <footer class="mt-auto pt-8 text-gray-400">
@@ -58,10 +66,81 @@
           </svg>
         </a>
       </footer>
-
     </div>
-    <!-- Start of HubSpot Embed Code -->
-<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/47820535.js"></script>
-<!-- End of HubSpot Embed Code -->
+
+    <script>
+      const WEBHOOK_POST_URL = 'https://n8n-do.dailyai.studio/webhook/81eae98a-5a6b-4fd8-9a96-816a50845a9b';
+      const WEBHOOK_GET_URL = 'https://n8n-do.dailyai.studio/webhook/1dec829d-4ce7-43be-a6ee-a787a06712ca';
+
+      // Only add event listener if we're on the create page
+      const generateButton = document.getElementById('generateButton');
+      if (generateButton) {
+        generateButton.addEventListener('click', handleGenerateLink);
+      }
+
+      async function handleGenerateLink() {
+        const textarea = document.querySelector('textarea');
+        const message = textarea.value;
+        
+        try {
+          const response = await fetch(WEBHOOK_POST_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text: message })
+          });
+          
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          
+          const { uuid } = await response.json();
+          window.location.href = `/${uuid}`;
+          
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+
+      async function getSecretMessage(uuid) {
+        try {
+          const response = await fetch(WEBHOOK_GET_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ uuid })
+          });
+          
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          
+          return await response.json();
+        } catch (error) {
+          console.error('Error:', error);
+          return null;
+        }
+      }
+
+      // Check if we're on a secret page
+      const path = window.location.pathname;
+      const uuid = path.substring(1);
+
+      if (uuid && uuid.length > 0) {
+        // Hide create UI and show view UI
+        document.getElementById('createMessage').style.display = 'none';
+        document.getElementById('viewMessage').classList.remove('hidden');
+        
+        getSecretMessage(uuid).then(data => {
+          if (data && data.status === 'active') {
+            document.getElementById('secretMessage').textContent = data.text;
+          } else {
+            document.getElementById('expiredMessage').classList.remove('hidden');
+          }
+        });
+      }
+    </script>
   </body>
 </html>
